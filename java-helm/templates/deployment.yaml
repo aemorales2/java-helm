@@ -36,22 +36,23 @@ spec:
           ports:
             - name: http
               containerPort: 8080
+          startupProbe:
+            httpGet:
+              path: /ws_helm_example/health
+              port: http
+            failureThreshold: 5
           livenessProbe:
             httpGet:
               path: /ws_helm_example/health
-              port: 8080
-            timeoutSeconds: 10
-            periodSeconds: 10
-            initialDelaySeconds: 30
-            failureThreshold: 5
+              port: http
+            failureThreshold: 1
+            initialDelaySeconds: 0
           readinessProbe:
             httpGet:
               path: /ws_helm_example/health
-              port: 8080
-            timeoutSeconds: 10
-            periodSeconds: 10
-            initialDelaySeconds: 30
-            failureThreshold: 5
+              port: http
+            failureThreshold: 1
+            initialDelaySeconds: 0
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
