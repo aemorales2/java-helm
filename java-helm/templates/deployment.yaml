@@ -34,25 +34,25 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - name: http
-              containerPort: 8080
+            - name: {{ .Values.ports.http.name }}
+              containerPort: {{ .Values.ports.http.containerPort }}
           startupProbe:
             httpGet:
-              path: /ws_helm_example/health
-              port: http
-            failureThreshold: 5
+              path: {{ .Values.probes.endpoints.health }}
+              port: {{ .Values.ports.http.name }}
+            failureThreshold: {{ .Values.probes.startup.failureThreshold }}
           livenessProbe:
             httpGet:
-              path: /ws_helm_example/health
-              port: http
-            failureThreshold: 1
-            initialDelaySeconds: 0
+              path: {{ .Values.probes.endpoints.health }}
+              port: {{ .Values.ports.http.name }}
+            failureThreshold: {{ .Values.probes.liveness.failureThreshold }}
+            initialDelaySeconds: {{ .Values.probes.liveness.initialDelaySeconds }}
           readinessProbe:
             httpGet:
-              path: /ws_helm_example/health
-              port: http
-            failureThreshold: 1
-            initialDelaySeconds: 0
+              path: {{ .Values.probes.endpoints.health }}
+              port: {{ .Values.ports.http.name }}
+            failureThreshold: {{ .Values.probes.readiness.failureThreshold }}
+            initialDelaySeconds: {{ .Values.probes.liveness.initialDelaySeconds }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}

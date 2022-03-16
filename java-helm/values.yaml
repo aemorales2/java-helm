@@ -83,3 +83,20 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+ports:
+  http:
+    name: http
+    containerPort: 8080
+
+probes:
+  endpoints:
+    health: /ws_helm_example/health
+  startup:
+    failureThreshold: 5
+  liveness:
+    failureThreshold: 1
+    initialDelaySeconds: 0
+  readiness:
+    failureThreshold: 1
+    initialDelaySeconds: 0
