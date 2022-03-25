@@ -11,6 +11,7 @@ spec:
   selector:
     matchLabels:
       {{- include "java-helm.selectorLabels" . | nindent 6 }}
+    app: "{{ .Values.image.repository }}"
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -19,6 +20,7 @@ spec:
       {{- end }}
       labels:
         {{- include "java-helm.selectorLabels" . | nindent 8 }}
+        app: "{{ .Values.image.repository }}"
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
