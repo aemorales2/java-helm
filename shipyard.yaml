@@ -5,3 +5,11 @@ metadata:
 spec:
   stages:
     - name: "local"
+      sequences:
+      - name: "delivery"
+        tasks:
+        - name: "deployment"
+        - name: "release"
+        - name: "deployment"
+          properties:
+            deploymentstrategy: direct
