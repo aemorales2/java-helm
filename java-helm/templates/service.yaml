@@ -13,4 +13,3 @@ spec:
       name: web
   selector:
     {{- include "java-helm.selectorLabels" . | nindent 4 }}
-    app:  "{{ .Values.image.repository }}"
