@@ -1,0 +1,10 @@
+extraScrapeConfigs: |
+  - job_name: 'ws_helm_example'
+    honor_timestamps: true
+    scrape_interval: 2s
+    scrape_timeout: 2s
+    metrics_path: '/ws_helm_example/prometheus'
+    scheme: http
+    static_configs:
+      - targets:
+        - test-ws-helm-example.local.svc.cluster.local:8080

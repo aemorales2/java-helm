@@ -18,7 +18,8 @@ public class BasicService {
         dateFormatter = DateTimeFormatter.ofPattern(DATE_FORMAT_STRING);
     }
 
-    public String getCurrentDateTime() {
+    public String getCurrentDateTime() throws InterruptedException {
+        //Thread.sleep(2000);
         Instant now = Instant.now();
         ZonedDateTime utc = now.atZone(ZoneId.of(UTC));
         return dateFormatter.format(utc);

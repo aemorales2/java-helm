@@ -9,7 +9,7 @@ image:
   repository: ws-helm-example
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v1"
+  tag: "v5"
 
 imagePullSecrets: []
 nameOverride: ""
